@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Seattle Construction Estimate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="/vendors/normalize.css"> -->
+    <link href="css.css" rel="stylesheet">
+
+
+  </head>
+
+  <body>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- As a heading -->
+<nav class="navbar">
+<h1 class="navbar-brand mb-0">Seattle Home Remodel/Construction Cost Estimate</h1>
+           
+        </nav>
+<div class="center"><h2>Instantly estimate your home remodelling cost. <br>
+Experieced contractors are ready to help.</h2></div>
+      <div class="boxed">
+        <form>
+
+
+           <div class="input"><LABEL> Your project type:</LABEL> 
+           <br>
+              <select class="form-control" id = "action" onchange="getSelectedValueAction();">
+                <option selected disabled>Select project type</option>
+                <option value="NEW CONSTRUCTION">New construction</option>
+                <option value="ADDITION OR ALTERATION">Addition or alteration</option>
+                <option value="DEMOLITION">Demolition</option>
+              </select>
+              <br>
+
+          <label>Project location: </label>
+           <br><input class="form-control" id="exampleTextarea" rows="3" id="address" type = "text" name = "Address" placeholder="Address" />
+           </div>
+
+
+           <div class="input">
+
+           <LABEL> Property type:</LABEL>
+            <br>
+            <select class="form-control" id = "category" onchange="getSelectedValueCategory();" >
+              <option selected disabled>Your property type</option>
+              <option value="SINGLE FAMILY/DUPLEX">Single family/Duplex</option>
+              <option value="MULTIFAMILY">Multifamily</option>
+              <option value="COMMERCIAL">Commercial</option>
+              <option value="INSTITUTIONAL">Institutional</option>
+            </select>
+           <br>
+
+
+          <label>Starting Month:</label><br> <input id="exampleTextarea" rows="3"class="form-control" id="month" type="text" name="Starting Month" placeholder="mm/yyyy" /></div>
+
+          <div style="display: block" class="des">
+           <label style="margin-top: 20px">Description: </label><br><input placeholder="e.g: Remodel a kitchen"class="form-control" id="exampleTextarea" rows="3"id="description" type="text" name="Description"/></div>
+
+        </form>
+
+        <div style="padding:0px 20px" style="text-align: left"><p><input id="quote" class="btn btn-primary" type="button" value="Estimate" /></p></div>
+
+        <div class="result"></div>
+
+      </div>
+
+    <footer>
+      &copy; FBMLHACK17
+    </footer>
+
+
+  </body>
+
+  <script>
+          function getSelectedValueCategory()
+          {
+            var selectedValueCategory = document.getElementById("category").value;
+            console.log(selectedValueCategory);
+          }
+
+          function getSelectedValueAction()
+          {
+            var selectedValueAction = document.getElementById("action").value;
+            console.log(selectedValueAction);
+          }
+
+          $.fn.serializeObject = function()
+            {
+                var o = {};
+                var a = this.serializeArray();
+                $.each(a, function() {
+                    if (o[this.name] !== undefined) {
+                        if (!o[this.name].push) {
+                            o[this.name] = [o[this.name]];
+                        }
+                        o[this.name].push(this.value || '');
+                    } else {
+                        o[this.name] = this.value || '';
+                    }
+                });
+                return o;
+            };
+
+          $(function() {
+              $('#quote').click(function() {
+                  $('#json').text(JSON.stringify($('form').serializeObject()));
+                  //TODO: append action type and category into json.
+
+                  $.post("https://r9qy82qk5f.execute-api.us-east-1.amazonaws.com/alpha/price", JSON.stringify($('form').serializeObject()), function( data ) {
+                          $( "#result" ).html( data );
+                          alert( data['price'] );
+                  });
+
+                  return false;
+              });
+          });
+  </script>
+</html>
