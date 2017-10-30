@@ -1,0 +1,90 @@
+body {
+    background-image: url("bgimage.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: #eee;
+}
+
+h1 {
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h2 {
+  font-family: 'Open Sans', sans-serif;
+  text-align:center;
+  margin: 20px auto;
+  padding: 20px auto 0;
+  color: #fff; 
+}
+
+footer {
+  font-family: 'Open Sans', sans-serif;
+  position: fixed;
+  bottom: 10px;
+  margin: 0 20px;
+  color: #4EBAB6;
+}
+
+input[type="text"] {
+  font-family: 'Open Sans', sans-serif;
+}
+
+select {
+  font-family: inherit;
+}
+
+.center {
+  margin: 30px auto;
+}
+.boxed{
+  position: relative;
+	border: 0px;
+  border-radius: 5px;
+  width: 516px;
+/*  height: 360px;*/
+  background-color: white;
+  margin: 30px auto;
+  padding: 20px;
+  box-shadow: 0 2px 5px 1px rgba(180, 180, 180, .3);
+}
+
+.left {
+  margin-right: 20px;
+}
+
+.input {
+  display:inline-block;
+/*	padding: 20px;
+	margin:0;*/
+/*  margin-right: 20px;*/
+  font-family: 'Open Sans', sans-serif;
+}
+
+.des {
+  font-family: 'Open Sans', sans-serif;
+/*  padding:0px 20px 20px;*/}
+
+
+.btn {
+  background-color: #FF7C5B; 
+  border:none;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  margin-top: 20px;
+}
+
+.btn:hover {
+  background-color: #DD512E;
+}
+
+b {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  margin: 30px;
+  position: absolute;
+  bottom: -5px;
+  color: #555;
+}
