@@ -11,9 +11,8 @@
     <title>Seattle Construction Estimate</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<link rel="stylesheet" href="/vendors/normalize.css"> -->
-    <link href="css.css" rel="stylesheet">
-
-
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   </head>
 
   <body>
@@ -29,13 +28,12 @@
 <h1 class="navbar-brand mb-0">Seattle Home Remodel/Construction Cost Estimate</h1>
            
         </nav>
-<div class="center"><h2>Instantly estimate your home remodelling cost. <br>
-Experieced contractors are ready to help.</h2></div>
+<div class="center"><h2>Instantly estimate your home remodelling cost</h2></div>
       <div class="boxed">
         <form>
 
 
-           <div class="input"><LABEL> Your project type:</LABEL> 
+           <div class="input left"><LABEL> Your project type:</LABEL> 
            <br>
               <select class="form-control" id = "action" onchange="getSelectedValueAction();">
                 <option selected disabled>Select project type</option>
@@ -71,9 +69,7 @@ Experieced contractors are ready to help.</h2></div>
 
         </form>
 
-        <div style="padding:0px 20px" style="text-align: left"><p><input id="quote" class="btn btn-primary" type="button" value="Estimate" /></p></div>
-
-        <div class="result"></div>
+        <div class="estimate"><input id="quote" class="btn btn-primary" type="button" value="Estimate" /><b id="result"></b></div>
 
       </div>
 
@@ -119,9 +115,9 @@ Experieced contractors are ready to help.</h2></div>
                   $('#json').text(JSON.stringify($('form').serializeObject()));
                   //TODO: append action type and category into json.
 
-                  $.post("https://r9qy82qk5f.execute-api.us-east-1.amazonaws.com/alpha/price", JSON.stringify($('form').serializeObject()), function( data ) {
-                          $( "#result" ).html( data );
-                          alert( data['price'] );
+                  $.post("https://ou1jhio01h.execute-api.us-east-1.amazonaws.com/alpha/permit/v1", JSON.stringify($('form').serializeObject()), function( data ) {
+                          $( "#result" ).html( "Estimated cost is: $" + parseInt(data['price']) );
+                          // alert( data['price'] );
                   });
 
                   return false;
